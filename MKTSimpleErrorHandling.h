@@ -7,9 +7,9 @@
 #define ERRORVARIABLE short
 #define NUMBEROFSTEPS short
 
-#define SETUP_ERROR_HANDLING(x) char * charArray = x;size_t sizeOfArray = 0;\
-for(int i=0;charArray[i]!=0;i++)sizeOfArray=i+2;char*filePath=malloc(sizeOfArray);\
-for(int i=0;i<sizeOfArray;i++)filePath[i]=charArray[i];ERRORVARIABLE errorCode = 0;\
+#define SETUP_ERROR_HANDLING(x) char * charArray = x;size_t sizeOfMKTErrorFP = 0;\
+for(int i=0;charArray[i]!=0;i++)sizeOfMKTErrorFP=i+2;char*filePath=malloc(sizeOfMKTErrorFP);\
+for(int i=0;i<sizeOfMKTErrorFP;i++)filePath[i]=charArray[i];ERRORVARIABLE errorCode = 0;\
 NUMBEROFSTEPS step = 0;
 
 #define HANDLE_ERRORS printf("\033[90;40mSTEP: \033[93;40m%d\n",step); \
