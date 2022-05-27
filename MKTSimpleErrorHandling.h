@@ -4,8 +4,8 @@
 #ifndef MKT_HANDLE_ERRORS
 #define MKT_HANDLE_ERRORS
 
-#define ERRORVARIABLE short
-#define NUMBEROFSTEPS short
+#define ERRORVARIABLE unsigned short
+#define NUMBEROFSTEPS unsigned short
 
 #define SETUP_ERROR_HANDLING(x) char * charArray = x;size_t sizeOfMKTErrorFP = 0;\
 for(int i=0;charArray[i]!=0;i++)sizeOfMKTErrorFP=i+2;char*filePath=malloc(sizeOfMKTErrorFP);\
@@ -15,6 +15,7 @@ NUMBEROFSTEPS step = 0;
 #define HANDLE_ERRORS printf("\033[90;40mSTEP: \033[93;40m%d\n",step); \
 step++;if(errorCode != 0){printErrors(&errorCode, filePath);return errorCode;}
 
+#ifdef MKT_ERROR_HANDLING_IMPLEMENTATION
 void printErrors(ERRORVARIABLE * errorCode, char * filePath)
 {
     FILE *MKTFILE;
@@ -73,4 +74,7 @@ void printErrors(ERRORVARIABLE * errorCode, char * filePath)
     }
     return;
 }
-#endif
+#else
+extern void printErrors(ERRORVARIABLE * errorCode, char * filePath);
+#endif // MKT_ERROR_HANDLING_IMPLEMENTATION
+#endif // MKT_HANDLE_ERRORS

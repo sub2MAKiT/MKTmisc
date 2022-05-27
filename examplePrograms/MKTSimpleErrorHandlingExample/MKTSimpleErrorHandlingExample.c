@@ -1,3 +1,4 @@
+#define MKT_ERROR_HANDLING_IMPLEMENTATION
 #include "../../MKTSimpleErrorHandling.h"
 
 int main(int argc,char ** argv)

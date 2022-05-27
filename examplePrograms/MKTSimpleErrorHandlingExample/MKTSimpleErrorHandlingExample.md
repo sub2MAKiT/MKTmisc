@@ -2,6 +2,7 @@
 
 ### Program
 ```C
+#define MKT_ERROR_HANDLING_IMPLEMENTATION
 #include "../../MKTSimpleErrorHandling.h"
 
 int main(int argc,char ** argv)
@@ -34,8 +35,9 @@ int main(int argc,char ** argv)
 ```
 
 ## Breakdown
-1. Include MKTSimpleErrorHandling
+1. Include MKTSimpleErrorHandling and define ```MKT_ERROR_HANDLING_IMPLEMENTATION``` above it
 ```C
+#define MKT_ERROR_HANDLING_IMPLEMENTATION
 #include "../../MKTSimpleErrorHandling.h"
 ```
 2. Setup MKTSimpleErrorHandling, with a path to your error string text file
