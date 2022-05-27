@@ -1,0 +1,3 @@
+0 - No errors
+1 - System error
+2 - Input not 'a'
