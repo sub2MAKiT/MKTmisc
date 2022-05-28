@@ -23,7 +23,8 @@ void printErrors(ERRORVARIABLE * errorCode, char * filePath)
 {
     FILE *MKTFILE;
     ERRORVARIABLE ogErrorCode = *errorCode;
-    if( fopen_s( &MKTFILE, filePath, "rb" ) == 0 )
+    MKTFILE = fopen( filePath, "rb" );
+    if( MKTFILE != NULL )
     {
         char *charArray;
         fseek(MKTFILE, 0L, SEEK_END);
