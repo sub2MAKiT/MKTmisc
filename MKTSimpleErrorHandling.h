@@ -1,11 +1,9 @@
-#pragma once
 #include <stdio.h>
 #include <stdlib.h>
-#ifndef MKT_HANDLE_ERRORS
-#define MKT_HANDLE_ERRORS
-
 #define ERRORVARIABLE unsigned short
 #define NUMBEROFSTEPS unsigned short
+
+void printErrors(ERRORVARIABLE *, char *);
 
 #define SETUP_ERROR_HANDLING(x) char * charArray = x;size_t sizeOfMKTErrorFP = 0;\
 for(int i=0;charArray[i]!=0;i++)sizeOfMKTErrorFP=i+2;char*filePath=malloc(sizeOfMKTErrorFP);\
@@ -15,7 +13,12 @@ NUMBEROFSTEPS step = 0;
 #define HANDLE_ERRORS printf("\033[90;40mSTEP: \033[93;40m%d\n",step); \
 step++;if(errorCode != 0){printErrors(&errorCode, filePath);return errorCode;}
 
+void printErrors(ERRORVARIABLE * errorCode, char * filePath);
+
+
+
 #ifdef MKT_ERROR_HANDLING_IMPLEMENTATION
+
 void printErrors(ERRORVARIABLE * errorCode, char * filePath)
 {
     FILE *MKTFILE;
@@ -28,7 +31,7 @@ void printErrors(ERRORVARIABLE * errorCode, char * filePath)
         rewind(MKTFILE);
         charArray = (char*)malloc(sizeOfFile);
         if(charArray == NULL)
-        {*errorCode = 1;printf("\033[31;40mERROR\033[93;40m[1]\033[31;40m - \033[97;40mSystem error \033[39;49m");return;}
+        {*errorCode = 1;printf("\033[31;40mERROR\033[93;40m[1]\033[31;40m - \033[97;40mSystem error (malloc failure) \033[39;49m");return;}
         sizeOfFile = fread( charArray,1, sizeOfFile, MKTFILE );
         fclose( MKTFILE );
         // now it's time for some simple file reading shenanigans
@@ -64,7 +67,7 @@ void printErrors(ERRORVARIABLE * errorCode, char * filePath)
         printf("\033[31;40mERROR\033[93;40m[%d]\033[31;40m - \033[97;40m",*errorCode);
         for(int i = positionOfError; charArray[i] != '\n' && i < sizeOfFile;i++)
             printf("%c",charArray[i]);
-        printf("\033[39;49m");
+        printf("\033[39;49m\n");
     }
     else
         *errorCode = 1;
@@ -74,7 +77,4 @@ void printErrors(ERRORVARIABLE * errorCode, char * filePath)
     }
     return;
 }
-#else
-extern void printErrors(ERRORVARIABLE * errorCode, char * filePath);
 #endif // MKT_ERROR_HANDLING_IMPLEMENTATION
-#endif // MKT_HANDLE_ERRORS
